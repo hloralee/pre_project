@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New person</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/}" th:object="${users}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+<!--    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>-->
+    <br/>
+    <label for="surname">Enter surname: </label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+<!--    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{surname}">Error</div>-->
+    <br/>
+    <label for="age">Enter age: </label>
+    <input type="text" th:field="*{age}" id="age"/>
+
+    <input style="display: none;" readonly th:if="${users.getId()}" type="text" th:field="*{id}" id="id"/>
+<!--    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Error</div>-->
+    <br/>
+    <input th:if="${users.getId() == 0}" type="submit" value="Create!"/>
+    <input th:if="${users.getId()}" type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>
