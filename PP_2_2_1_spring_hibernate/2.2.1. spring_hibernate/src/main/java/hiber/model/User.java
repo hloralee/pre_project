@@ -7,22 +7,12 @@ import javax.persistence.*;
 public class User {
 
    @Id
+   @Column(name = "id")
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
-   @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-   @JoinColumn(name = "car_id")
-   private Car car;
 
    @Column(name = "name")
    private String firstName;
-
-   public void setCar(Car car) {
-      this.car = car;
-   }
-
-   public Car getCar() {
-      return car;
-   }
 
    @Column(name = "last_name")
    private String lastName;
@@ -30,12 +20,23 @@ public class User {
    @Column(name = "email")
    private String email;
 
+   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+   private Car car;
+
    public User() {}
    
    public User(String firstName, String lastName, String email) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
+   }
+
+   public void setCar(Car car) {
+      this.car = car;
+   }
+
+   public Car getCar() {
+      return car;
    }
 
    public Long getId() {
@@ -74,10 +75,10 @@ public class User {
    public String toString() {
       return "User{" +
               "id=" + id +
-              ", car=" + car +
               ", firstName='" + firstName + '\'' +
               ", lastName='" + lastName + '\'' +
               ", email='" + email + '\'' +
+              ", car=" + car +
               '}';
    }
 }

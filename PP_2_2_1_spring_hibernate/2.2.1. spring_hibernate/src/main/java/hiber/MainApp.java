@@ -16,14 +16,20 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      userService.add(new User("User1", "Lastname1", "user1@mail.ru"),
-              new Car("Tesla", 3));
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru"),
-              new Car("Tesla", 1));
-      userService.add(new User("User3", "Lastname3", "user3@mail.ru"),
-              new Car("Tesla", 4));
-      userService.add(new User("User4", "Lastname4", "user4@mail.ru"),
-              new Car("Tesla", 2));
+      User user1 = new User("User1", "Lastname1", "user1@mail.ru");
+      User user2 = new User("User2", "Lastname2", "user2@mail.ru");
+      User user3 = new User("User3", "Lastname3", "user3@mail.ru");
+      User user4 = new User("User4", "Lastname4", "user4@mail.ru");
+
+      Car[] car = new Car[]{new Car("Tesla", 3),
+              new Car("BMW", 1),
+              new Car("Mercedes", 2),
+              new Car("ВАЗ", 4)};
+
+      userService.add(user1, car[0]);
+      userService.add(user2, car[1]);
+      userService.add(user3, car[2]);
+      userService.add(user4, car[3]);
 
       List<User> users = userService.listUsers();
       for (User user : users) {
@@ -35,8 +41,8 @@ public class MainApp {
          System.out.println();
       }
 
-      for (int i = 1; i < 5; i++) {
-         System.out.println(userService.findUserViaCar(new Car("Tesla", i)));
+      for (int i = 0; i < 4; i++) {
+         System.out.println(userService.findUserViaCar(car[i]));
       }
 
 
