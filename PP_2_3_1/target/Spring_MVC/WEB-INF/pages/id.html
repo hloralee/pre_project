@@ -32,7 +32,7 @@
     <hr/>
     <a th:each="user : ${users}" style="padding: 0; border: none; font: inherit; background-color: transparent; cursor: pointer; text-decoration: underline;"
        th:href="@{'/new?name=' + ${user.getName()} +'&surname=' + ${user.getSurname()} + '&age=' + ${user.getAge()} + '&id=' + ${user.getId()}}">Edit user</a>
-    <form th:method="DELETE" th:action="@{/}" th:object="${users}">
+    <form th:method="POST" th:action="@{/delete}" th:object="${users}">
         <input style="display: none;" readonly type="text" th:field="*{id}" id="id"/>
         <input style="padding: 0; border: none; font: inherit; background-color: transparent; color: #0645ad; cursor: pointer; text-decoration: underline;"
                type="submit" value="Delete user"/>
