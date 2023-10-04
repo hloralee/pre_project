@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    <table border="1">
+        <tr>
+            <th>User_id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Age</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}">Id</td>
+            <td th:text="${user.getName()}">User</td>
+            <td th:text="${user.getSurname()}">Surname</td>
+            <td th:text="${user.getAge()}">Age</td>
+<!--            <a style="padding: 0; border: none; font: inherit; background-color: transparent; cursor: pointer; text-decoration: underline;"-->
+<!--               th:href="@{'/new?name=' + ${user.getName()} +'&surname=' + ${user.getSurname()} + '&age=' + ${user.getAge()} + '&id=' + ${user.getId()}}">Edit user</a>-->
+<!--            <form th:method="DELETE" th:action="@{/}" th:object="${users}">-->
+<!--                <input style="display: none;" readonly type="text" th:field="*{id}" id="id"/>-->
+<!--                <br/>-->
+<!--                <input style="padding: 0; border: none; font: inherit; background-color: transparent; color: #0645ad; cursor: pointer; text-decoration: underline;"-->
+<!--                       type="submit" value="Delete user"/>-->
+        </tr>
+    </table>
+    <br/>
+    <hr/>
+    <a th:each="user : ${users}" style="padding: 0; border: none; font: inherit; background-color: transparent; cursor: pointer; text-decoration: underline;"
+       th:href="@{'/new?name=' + ${user.getName()} +'&surname=' + ${user.getSurname()} + '&age=' + ${user.getAge()} + '&id=' + ${user.getId()}}">Edit user</a>
+    <form th:method="POST" th:action="@{/delete}" th:object="${users}">
+        <input style="display: none;" readonly type="text" th:field="*{id}" id="id"/>
+        <input style="padding: 0; border: none; font: inherit; background-color: transparent; color: #0645ad; cursor: pointer; text-decoration: underline;"
+               type="submit" value="Delete user"/>
+    </form>
+</div>
+</body>
+</html>
