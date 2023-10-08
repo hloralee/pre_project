@@ -34,7 +34,7 @@ public class UserController {
         userService.save(new User("admin", 26, "admin"));
         if (principal != null) {
             int id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-            model.addAttribute("user", userService.show(id));
+            model.addAttribute("user", id);
         }
         return "/index";
     }
@@ -55,6 +55,11 @@ public class UserController {
     }
 
     @GetMapping({"/admin/new", "/admin/edit"})
+    public String newPersonByAdmin(@ModelAttribute("users") User user) {
+        return "/new";
+    }
+
+    @GetMapping("/new")
     public String newPerson(@ModelAttribute("users") User user) {
         return "/new";
     }
